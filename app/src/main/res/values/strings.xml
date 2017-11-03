@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">動態看板</string>
+    <string name="title_home">首頁</string>
+    <string name="title_dashboard">動態看板</string>
+    <string name="title_notifications">通知</string>
+    <string name="like">喜歡</string>
+    <string name="dislike">討厭</string>
+    <string name="title_discovery">探索</string>
+    <string name="title_hahacoin">哈幣中心</string>
+    <string name="news">哈消息</string>
+    <string name="talks">打哈哈</string>
+    <string name="title_more">更多</string>
+</resources>

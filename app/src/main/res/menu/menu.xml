@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/person_list"
+        android:icon="@drawable/person_list"
+        android:title="search"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/write"
+        android:icon="@drawable/write"
+        android:padding="4dp"
+        android:title="car"
+        app:showAsAction="always"/>
+
+</menu>
