@@ -13,7 +13,7 @@ public class HahaVO implements Serializable{
     private String datetime;
     private String f_uid;
     private String feedId;
-    private Integer gpscode;
+    private String gpscode;
     private Boolean hasUrl;
     private Boolean isHidden;
     private Boolean isOffical;
@@ -84,11 +84,11 @@ public class HahaVO implements Serializable{
         this.feedId = feedId;
     }
 
-    public Integer getGpscode() {
+    public String getGpscode() {
         return gpscode;
     }
 
-    public void setGpscode(Integer gpscode) {
+    public void setGpscode(String gpscode) {
         this.gpscode = gpscode;
     }
 

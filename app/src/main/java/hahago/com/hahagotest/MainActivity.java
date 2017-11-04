@@ -19,11 +19,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -56,49 +60,19 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(
                 new StaggeredGridLayoutManager(
                         1, StaggeredGridLayoutManager.VERTICAL));
-        recyclerView.setAdapter(new BoardAdapter(this, getHahaVOList()));
 
+        recyclerView.setAdapter(new BoardAdapter(this, getData()));
 
-        //*****如果有取得資料會使用的方法*****
-        //recyclerView.setAdapter(new BoardAdapter(this, getData()));
-
-    }
-
-    private List<HahaVO> getHahaVOList() {
-        List<HahaVO> hahaVOList = new ArrayList<HahaVO>();
-        hahaVOList.add(getHahaVO());
-        hahaVOList.add(getHahaVO());
-        hahaVOList.add(getHahaVO());
-
-        return hahaVOList;
-    }
-
-    private HahaVO getHahaVO(){
-        HahaVO hahaVO = new HahaVO();
-        hahaVO.setBody("測試:1-24 \n測試:1-24 \n測試:1-24");
-        hahaVO.setUserName("Max Lin");
-        hahaVO.setUid("mmax");
-        hahaVO.setTimeDiff("21分鐘前");
-        hahaVO.setDistance("0m");
-        hahaVO.setPhoto("https://firebasestorage.googleapis.com/v0/b/hahago-tesla.appspot.com/o/" +
-                "root_userPost%2FVmBk67bmySOgyGqYJ8gepGyk86l1%2F-Kxgu3EZaZ71d42QsmRU?alt=media&" +
-                "token=23650104-1a56-4cea-ad25-f14a3c2feade");
-        hahaVO.setUserPhoto("https://firebasestorage.googleapis.com/v0/b/hahago-tesla.appspot.com/o/" +
-                "root_userprofiles%2FVmBk67bmySOgyGqYJ8gepGyk86l1%2FVmBk67bmySOgyGqYJ8gepGyk86l1?" +
-                "alt=media&token6fa9e4fa-d6c0-4cd2-a320-9f2f243e582e");
-        hahaVO.setNumGood(0);
-        hahaVO.setNumBad(0);
-
-        return hahaVO;
     }
 
     private List<HahaVO> getData() {
         String hahaData = "";
+        List<HahaVO> listdata = new ArrayList<HahaVO>();
         userlat = 24.7844431;
         userlon = 121.0172038;
         retrieveTask = (CommonTask) new CommonTask().execute(url,  "userlat", userlat.toString(), "userlng", userlon.toString());
 
-        String s = "";
+        JsonArray jsonArray = new JsonArray();
 
         try {
             hahaData = retrieveTask.get();
@@ -107,10 +81,15 @@ public class MainActivity extends AppCompatActivity {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-
         Gson gson = new Gson();
-        Type listType = new TypeToken<List<HahaVO>>(){}.getType();
-        return gson.fromJson(hahaData, listType);
+
+        JsonObject jsonObject = new Gson().fromJson(hahaData, JsonObject.class);
+        jsonArray = jsonObject.get("feeds").getAsJsonArray();
+
+
+        Type listType = new TypeToken<ArrayList<HahaVO>>(){}.getType();
+        listdata = gson.fromJson(jsonArray, listType);
+        return listdata;
     }
 
     private class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.BoardViewHolder> {

@@ -44,8 +44,7 @@
                         android:id="@+id/user_photo_iv"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
-                        android:scaleType="centerInside"
-                        android:src="@drawable/thumb_up" />
+                        android:scaleType="centerInside" />
 
                 </android.support.v7.widget.CardView>
 

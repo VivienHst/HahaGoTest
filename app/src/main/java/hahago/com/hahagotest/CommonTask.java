@@ -52,7 +52,7 @@ public class CommonTask extends AsyncTask<String, Integer, String>{
         connection.setDoOutput(true);
         connection.setUseCaches(false);
         connection.setRequestMethod("POST");
-        connection.setRequestProperty("charset", "UTF-8");
+        connection.setRequestProperty("Content-Type", "application/json");
 
 
         // 是Https請求
